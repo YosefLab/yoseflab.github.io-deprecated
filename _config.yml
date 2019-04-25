@@ -1,0 +1,79 @@
+# Site settings
+title:       Yosef Lab Blog
+# email:       adamgayoso@berkeley.edu 
+author:      Yosef Lab
+description: "Blog of the Yosef Lab at Cal"
+baseurl:     ""
+url:         "https://yoseflab.github.io"
+date_format: "%b %-d, %Y"
+timezone:    America/Los_Angeles
+
+# Google services
+google_analytics:
+google_verification:
+
+# Optional features
+animated:             false
+show_related_posts:   false
+show_post_footers:    false
+show_social_icons:    false
+ajaxify_contact_form: false
+future: true
+
+# Disqus post comments
+# (leave blank to disable Disqus)
+disqus_shortname: 
+
+# Facebook Comments plugin
+# (leave blank to disable Facebook Comments, otherwise set it to true)
+facebook_comments: 
+facebook_appid: 
+facebook_comments_number: 10
+
+# Social icons
+github_username:
+bitbucket_username:
+stackoverflow_id:
+twitter_username:
+google_plus_id:
+linkedin_username:
+angellist_username:
+medium_id:
+bitcoin_url:
+paypal_url:
+flattr_button:
+
+# Post sharing icons
+show_sharing_icons: true
+share_text: 'Spread the word: '
+# Change to 'true' to enable individual icons
+share_facebook: true
+share_twitter: true
+share_googleplus: false
+share_linkedin: true
+share_digg: false
+share_tumblr: false
+share_reddit: true
+share_stumbleupon: false
+share_hackernews: false
+
+# Build settings
+markdown:     kramdown
+redcarpet:
+  extensions: ['smart', 'tables', 'with_toc_data']
+permalink:    pretty
+paginate:     100
+sass:
+  style: compressed
+
+# Plugins
+plugins:
+  - jekyll-paginate
+  - jekyll-sitemap
+exclude:
+  - Gemfile
+  - Gemfile.lock
+  - Rakefile
+  - README.md
+  - screenshot.png
+  - vendor
