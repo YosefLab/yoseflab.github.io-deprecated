@@ -4,15 +4,9 @@ title: About the Blog
 permalink: /about/
 ---
 
-## Contributors
-
-TODO
-
-
 ## Mission statement
 
-TODO
-
+The Yosef Lab Blog is a medium for lab members to share research updates to a wide audience.
 
 ## Acknowledgements
 
