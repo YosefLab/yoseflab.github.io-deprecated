@@ -2,7 +2,7 @@
 title:       Yosef Lab Blog
 # email:       adamgayoso@berkeley.edu 
 author:      Yosef Lab
-description: "Blog of the Yosef Lab at Cal"
+description: "Yosef Lab Blog - Computational Biology/Computer Science @ UC Berkeley"
 baseurl:     ""
 url:         "https://yoseflab.github.io"
 date_format: "%b %-d, %Y"
