@@ -68,24 +68,15 @@ You may also use any valid HTML tag in your article, but please try to avoid thi
 
 ##Submitting an article
 
-The blog lives in this [github repository](https://github.com/offconvex/offconvex.github.io). If you are a regular contributor and your github account has admin access to the repository, you can add an article like this from your command line:
+The blog lives in this [github repository](https://github.com/YosefLab/yoseflab.github.io). If you are a regular contributor and your github account has admin access to the repository, you can add an article to the `/_posts` directory with your images added to the `/assets` directory. Please make sure your article is pointing to images in `/assets`.
 
+For example the following HTML code is acceptable in the markdown document.
 ~~~
-git clone https://github.com/offconvex/offconvex.github.io.git
-cd offconvex.github.io/_posts
-cp 2015-12-01-template.md 2015-12-01-your-post-tile.md
-git add 2015-12-01-your-post-tile.md
-# edit the article using your favorite editor
-git commit -m "my post"
-git push -u origin master
+<p style="text-align:center;">
+<img src="/assets/myimage.png" width="100%" alt="My image" />
+</p>
 ~~~
 
-If after that you make more changes you can upload them as follows:
+If you don't have admin access, you can either create a [pull request](https://help.github.com/articles/creating-a-pull-request/) (assuming you're comfortable with git) or send any regular contributor the article in markdown. If so, please start from [this template](https://raw.githubusercontent.com/offconvex/offconvex.github.io/master/_posts/2015-12-01-template.md) and follow the above. An example of a more complex blog post is [here](https://raw.githubusercontent.com/offconvex/offconvex.github.io/master/_posts/2018-11-07-optimization-beyond-landscape.md).
 
-~~~
-git commit -am "new changes"
-git pull
-git push
-~~~
-
-If you don't have admin access, you can either create a [pull request](https://help.github.com/articles/creating-a-pull-request/) (assuming you're comfortable with git) or send any regular contributor the article in markdown. If so, please start from [this template](https://raw.githubusercontent.com/offconvex/offconvex.github.io/master/_posts/2015-12-01-template.md) and follow the above.
+If you would like to test the addition of your article you may install [Jekyll](https://jekyllrb.com) and use the command `jekyll serve` from inside the forked repository. You can then view a local build of the website by following the outputted instructions.
