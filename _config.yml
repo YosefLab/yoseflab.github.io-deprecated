@@ -9,7 +9,7 @@ date_format: "%b %-d, %Y"
 timezone:    America/Los_Angeles
 
 # Google services
-google_analytics:
+google_analytics: UA-141905405-1
 google_verification:
 
 # Optional features
