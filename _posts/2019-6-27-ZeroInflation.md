@@ -28,11 +28,11 @@ The original scVI (1) model (referred to as the *ZINB* model) uses a zero-inflat
 #### Model selection metrics
 
 
-For model selection, we first consider held-out log likelihood. The marginal log-likelihood for our model is intractable. However, we can estimate it through importance sampling, without our variational distribution as the proposal distribution. In our tables of results, we report  a Kolmogorov-Smirnov statistic, hence lower is better. More details can be found in Appendix A. In addition, although this is not a metric for model comparison, we report for each dataset under scrutiny the average over all cell-gene entries of the dropout probabilities computed by the ZINB model and we report it as "ZINB dropout".
+For model selection, we first consider held-out log likelihood. The marginal log-likelihood for our model is intractable. However, we can estimate it through importance sampling, with our variational distribution as the proposal distribution. In our tables of results, we report  a Kolmogorov-Smirnov statistic, hence lower is better. More details can be found in Appendix A. In addition, although this is not a metric for model comparison, we report for each dataset under scrutiny the average over all cell-gene entries of the dropout probabilities computed by the ZINB model and we report it as "ZINB dropout".
 
 #### Hyperparameters selection
 
-Some concerns can be that a model's hyperparameters play a significant part in its performance and that improper tuning might affect our analysis. As a result we performed hyperparameters tuning on all datasets that we have considered using the **hyperopt** package. The hyperparameters were selected to maximize held-out log-likelihood, and we used early stopping. We refer to the blog article by Gabriel Misrachi which introduces this new scVI module. 
+Some concerns can be that a model's hyperparameters play a significant part in its performance and that improper tuning might affect our analysis. As a result we performed hyperparameters tuning on all datasets that we have considered using the **hyperopt** package. The hyperparameters were selected to maximize held-out log-likelihood, and we used early stopping. We refer to the future blog article by Gabriel Misrachi which introduces this new scVI module. 
 
 #### Statistical significance
 
@@ -61,7 +61,7 @@ We first analyze the results on the ZISynth dataset for different values of the 
 
 
 <p style="text-align:center;">
-<img src="/assets/blog-post-inflation/0627-synthetic-table.png" width="50%" alt="Synthetic" />
+<img src="/assets/blog-post-inflation/0627-synthetic-table.png" width="80%" alt="Synthetic" />
 </p>
 
 Table 1: Results of the Bayesian model selection experiments on synthetic data.
@@ -78,7 +78,7 @@ For each entry of the data matrix (cells x genes), the ZINB model jointly learns
 
 
 <p style="text-align:center;">
-<img src="/assets/blog-post-inflation/0624-zerostudy-dropouts.png" width="50%" alt="NB-means-dropout" />
+<img src="/assets/blog-post-inflation/0624-zerostudy-dropouts.png" width="80%" alt="NB-means-dropout" />
 </p>
 
 Figure 1 : distributions of estimated dropout and NB means for different ZISynth datasets. In blue, the points corresponding to limited-sampling zeros. In red, the points corresponding to dropout zeros.
@@ -95,7 +95,7 @@ We focus on the datasets that contains only synthetic RNA transcripts (ERCCs) an
 We note that some metrics are shown to significantly support either NB or ZINB when medians for both models or equal; this is due to better ranks in general on the whole distribution for the model designated as better performing.
 
 <p style="text-align:center;">
-<img src="/assets/blog-post-inflation/0627-spikein-table.png" width="50%" alt="Spike-ins-results" />
+<img src="/assets/blog-post-inflation/0627-spikein-table.png" width="80%" alt="Spike-ins-results" />
 </p>
 Table 2: Results of the Bayesian model selection experiments on the spike-in datasets.
 
@@ -110,11 +110,9 @@ For each dataset, we also report the empirical proportion of zero entries in the
 
 
 <p style="text-align:center;">
-<img src="/assets/blog-post-inflation/0627-biological-table.png" width="50%" alt="Real-datasets-results" />
+<img src="/assets/blog-post-inflation/0627-biological-table.png" width="80%" alt="Real-datasets-results" />
 </p>
 Table 3: Results of the Bayesian model selection experiments on Cortex, Hemato, Brain Small, PBMC and Retina.
-
-
 
 
 
@@ -126,7 +124,7 @@ Table 3: Results of the Bayesian model selection experiments on Cortex, Hemato, 
 We report an histogram of gene-specific reconstruction loss discrepencies for the Hemato dataset in Figure 2. As shown below, gene zero-inflation scores have heavy tails, corresponding to genes for which one or the other hypothesis makes more sense than the other. Non-exhaustive lists of predicted ZINB or NB genes are provided in appendix D. 
 
 <p style="text-align:center;">
-<img src="/assets/blog-post-inflation/0627-zi-genes.png" width="50%" alt="zi-genes-results" />
+<img src="/assets/blog-post-inflation/0627-zi-genes.png" width="40%" alt="zi-genes-results" />
 </p>
 Figure 2: Histogram of gene-specific reconstruction loss discrepencies between ZINB and NB model on the Hemato dataset
 
@@ -196,7 +194,7 @@ We assume there are 2 cell clusters and that every cell $n \in \{1, 2\}$ is an i
 
 The **dataset ZISynth** relies on the latter process, but by also adding zero-inflation by multiplying each gene expression $x_{ng}$ by $h_{ng} \sim Ber(1 - p_{ng})$ where $p_{ng} = pe^{-\lambda x_{ng}^2}$, $p$  being a fixed constant dropout probability, set at $p = 0.08$, and $\lambda \geq 0$ is a hyperparameter. Hence, when $\lambda > 0$, the higher the gene expression, the lower probability it has to be zeroed. $\lambda = 0$ corresponds to a uniform zero-inflation. Finally, $\lambda \rightarrow \infty$ corresponds to the absence of zero-inflation, as the dropout probability is nonzero if and only if the entry is already zero. In practice, in our simulations, $\lambda = 10$ proved enough to attain that regime.
      
-## Appendix C: Zeros of scVI - constitution of the plots
+## Appendix C: Zeros of scVI - supplementary methods
 
 To generate these figures, we trained ZINB-scVI with its optimal parameters - estimated with hyperopt - for each dataset under scrutiny. From that, we infer the NB mean and the dropout probability on each cell-gene entry 100 times before averaging them on the 100 inferences, again for each cell-gene entry. On the other hand, we retrieve the locations of limited sensitivity zeros and dropout using pre-computed class attributes, and we restrict the average NB means and dropouts to these zero entries.
 
@@ -204,7 +202,7 @@ Generating the same plots with the total zero probability instead of the dropout
 
 
 <p style="text-align:center;">
-<img src="/assets/blog-post-inflation/0624-zerostudy-totalzeros.png" width="50%" alt="zi-zeros-results" />
+<img src="/assets/blog-post-inflation/0624-zerostudy-totalzeros.png" width="80%" alt="zi-zeros-results" />
 </p>
 
 Figure 1bis : distributions of estimated total zero probabilities and NB means for different ZISynth datasets
