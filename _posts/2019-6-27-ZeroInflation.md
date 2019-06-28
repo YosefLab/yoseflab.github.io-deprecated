@@ -50,7 +50,7 @@ We also tried to predict which genes were zero-inflated. For this purpose, we as
 
 We consider a mixture of synthetic datasets from multivariate count distributions (Appendix B), real datasets with spike-in measurements (analyzed in (3)) and real datasets (analyzed in (1) and accessible from the scVI codebase). 
 
-<table style="width:70%; font-size:80%" align="center"><tr><th>Dataset name</th><th>Cells</th><th>Protocol</th></tr><tr><td>ZISynth</td><td>12,000</td><td>Synthetic data, see Appendix B</td></tr><tr><td>Klein et al. 2015 (14)</td><td>953</td><td>InDrops</td></tr><tr><td>Zheng et al. 2017 (11)</td><td>1,015</td><td>GemCode</td></tr><tr><td>Svensson et al. 2017 (1) (3)</td><td>2,000</td><td>10x Chromium (v1)</td></tr><tr><td>Svensson et al. 2017 (2) (3)</td><td>2,000</td><td>10x Chromium (v1)</td></tr><tr><td>Brain Small (11)</td><td>9,128</td><td>10x Chromium (v2)</td></tr><tr><td>Cortex (9)</td><td>3,005</td><td>Smart-Seq2</td></tr><tr><td>Hemato (10)</td><td>4,016</td><td>InDrops</td></tr><tr><td>PBMC (11)</td><td>12,039</td><td>10x Chromium (v2)</td></tr><tr><td>Retina (12)</td><td>27,499</td><td>Drop-Seq</td></tr></table>
+<table style="width:70%; font-size:80%" align="center"><tr><th>Dataset name</th><th>Cells</th><th>Protocol</th></tr><tr><td>ZISynth</td><td>12,000</td><td>Synthetic data, see Appendix B</td></tr><tr><td>Klein et al. 2015 (13)</td><td>953</td><td>InDrops</td></tr><tr><td>Zheng et al. 2017 (11)</td><td>1,015</td><td>GemCode</td></tr><tr><td>Svensson et al. 2017 (1) (3)</td><td>2,000</td><td>10x Chromium (v1)</td></tr><tr><td>Svensson et al. 2017 (2) (3)</td><td>2,000</td><td>10x Chromium (v1)</td></tr><tr><td>Brain Small (11)</td><td>9,128</td><td>10x Chromium (v2)</td></tr><tr><td>Cortex (9)</td><td>3,005</td><td>Smart-Seq2</td></tr><tr><td>Hemato (10)</td><td>4,016</td><td>InDrops</td></tr><tr><td>PBMC (11)</td><td>12,039</td><td>10x Chromium (v2)</td></tr><tr><td>Retina (12)</td><td>27,499</td><td>Drop-Seq</td></tr></table>
 
 
 The synthetic datasets served as a sanity check that our methodology made sense on data that we had ground truth for. We selected these datasets to validate that our metrics are consistent whether or not the data is zero-inflated. The datasets from (3) were restricted to ERCC spike-ins who were present in more than 20% of the data. Cortex, Hemato, Brain Small, Retina, PBMC were restricted to the 1200 most variable genes to speed computations.
@@ -146,7 +146,7 @@ We acknowledge members of the Yosef Lab, especially Zoë Steier and Matt Jones f
 
 (1)  Romain Lopez, Jeffrey Regier, Michael B Cole, Michael I Jordan, and Nir Yosef.  Deep generative modeling for single-cell transcriptomics. Nature Methods, 2018.
 
-(2)  Emma  Pierson  and  Christopher  Yau.   ZIFA:  Dimensionality  reduction  for  zero-inflated  single-cell gene expression analysis. Genome biology, 2015.
+(2)  Emma Pierson  and  Christopher  Yau.   ZIFA:  Dimensionality  reduction  for  zero-inflated  single-cell gene expression analysis. Genome biology, 2015.
 
 (3)  Valentine Svensson.  Droplet scRNA-seq is not zero-inflated.  biorXiv, 2019.
 
@@ -184,7 +184,7 @@ Posterior predictive checks (PPCs) are another way to assess Bayesian models. Th
 + We now have at disposal $S:=\{\hat T_g, g \in \mathcal{G}\}$ and $S^0:=\{T_g^0, g \in \mathcal{G}\}$ the set of synthetic and real observations of the discrepancy measures. A non-parametric test (2-sample Kolmogorov-Smirnov) is then applied. The obtained KS statistic is $K = \sup d(F_n , F_n^0)$, where $F_n$ and $F_n^0$ are the empirical distribution functions of $S$ and $S_0$ can be understood as a metric describing how different the synthetic and real distributions of measures are. In our experiments, $d$ is the absolute value.
 
 #### Designing the discrepancy measure
-Keeping in mind that we want to determine if the Negative Binomial can on its own explain the important number of zeros of scRNA data, a natural choice of $T$ can be the fraction of zeros in the gene expression matrix (averaged over cells, for a specific gene). Another measure could be the ratio of the number of zeros to the mean of non zero gene expressions (over all cells for a specific gene). Finally, the coefficient of variation defined as the standard deviation of gene expressions divided its mean can be a judicious choice as it is a standard metric in biology (8).
+Keeping in mind that we want to determine if the Negative Binomial can on its own explain the important number of zeros of scRNA data, a natural choice of T can be the *dropout ratio* - the fraction of zeros in the gene expression matrix (averaged over cells, for a specific gene). Another measure could be the *zeros-to-expression ratio* - the ratio of the number of zeros to the mean of non zero gene expressions (over all cells for a specific gene). Finally, the *coefficient of variation* defined as the standard deviation of gene expressions divided its mean can be a judicious choice as it is a standard metric in biology (8).
 
 ## Appendix B: Generative process for simulated data 
 
