@@ -6,6 +6,7 @@ summary:    Learn to write a post in markdown
 author:     Your name
 permalink:  /guide/example/
 visible:    False
+sitemap: false
 ---
 
 Articles are written in markdown (kramdown).  

@@ -2,6 +2,7 @@
 layout: page
 title: Contributing an article
 permalink: /guide/
+sitemap: false
 ---
 
 If you're contributing an article, please read these instructions on how to write and post an article on this blog.
