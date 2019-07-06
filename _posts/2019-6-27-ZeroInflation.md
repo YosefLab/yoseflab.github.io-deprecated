@@ -28,7 +28,7 @@ For model selection, we first consider held-out log likelihood. The marginal log
 
 #### Hyperparameters selection
 
-Some concerns can be that a model's hyperparameters play a significant part in its performance and that improper tuning might affect our analysis. As a result we performed hyperparameters tuning on all datasets that we have considered using scVI's new autotune module, based on the **hyperopt** package. The hyperparameters were selected to maximize held-out log-likelihood, and we used early stopping. We refer to the [blog article]() by Gabriel Misrachi which introduces this new scVI module. 
+Some concerns can be that a model's hyperparameters play a significant part in its performance and that improper tuning might affect our analysis. As a result we performed hyperparameters tuning on all datasets that we have considered using scVI's new autotune module, based on the **hyperopt** package. The hyperparameters were selected to maximize held-out log-likelihood, and we used early stopping. We refer to the [blog article](https://yoseflab.github.io/2019/07/05/Hyperoptimization/) by Gabriel Misrachi which introduces this new scVI module. 
 
 #### Statistical significance
 
@@ -135,7 +135,7 @@ Naturally, a more complex distribution is suitable only if it proves to fit the 
 Please share any feedback with us via twitter (@YosefLab) or through the comment section below.
 
 ## Acknowledgements
-We acknowledge members of the Yosef Lab, especially Zoë Steier and Matt Jones for remarks on some of the results on this blog post. We thank Adam Gayoso for reviewing some of the code and Gabriel Misrachi for his work on Hyperopt, which is the basis for meaningful model selection. 
+We acknowledge members of the Yosef Lab, especially Zoë Steier and Matt Jones for remarks on some of the results on this blog post. We thank Adam Gayoso for reviewing some of the code and Gabriel Misrachi for his work on scVI's new autotune module, which is the basis for meaningful model selection. 
 
 
 ## Bibliography
