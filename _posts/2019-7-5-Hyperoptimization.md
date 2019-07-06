@@ -1,7 +1,7 @@
 ---
 layout:     post
 title:      Hyperparameter search for scVI
-date:       2019-07-03 13:39:00
+date:       2019-07-05 12:00:00
 summary:    A study of the effects of hyperparameter optimization on scVI models.
 author:     Gabriel Misrachi, Jeffrey Regier, Romain Lopez, Nir Yosef
 visible:    True
