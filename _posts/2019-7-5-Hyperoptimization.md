@@ -7,9 +7,11 @@ author:     Gabriel Misrachi, Jeffrey Regier, Romain Lopez, Nir Yosef
 visible:    True
 ---
 
-While stochastic gradient-based optimization is highly successful for setting weights and other differentiable parameters of a neural network, it is in general useless for setting hyperparameters -- non-differentiable parameters that control the structure of the network (e.g. the number of hidden layers, or the dropout rate) or settings of the optimizer itself (e.g., the learning rate schedule). Yet finding good settings for hyperparameters is essential for good performance for deep methods like [scVI](https://www.nature.com/articles/s41592-018-0229-2). Furthermore, as pointed out by [Hu and Greene (2019)](https://www.worldscientific.com/doi/pdf/10.1142/9789813279827_0033?download=true&) selecting hyperparameters is nessary in order to compare different machine learning models, especially if those are substantially sensitive to hyperparameter variations. Generally, hyperparameter search is known to be challenging for the end-user and time-consuming. Therefore, we added in [`scVI`](https://github.com/YosefLab/scVI) a module based the Bayesian optimization framework [`hyperopt`](https://github.com/hyperopt/hyperopt). This new feature makes effective use of multiple GPUs and is a ready-to-use solution for tuning hyperparameters in scVI. This blog post presents this feature and investigates how end-users will benefit from it.
+While stochastic gradient-based optimization is highly successful for setting weights and other differentiable parameters of a neural network, it is in general useless for setting hyperparameters -- non-differentiable parameters that control the structure of the network (e.g. the number of hidden layers, or the dropout rate) or settings of the optimizer itself (e.g., the learning rate schedule). Yet finding good settings for hyperparameters is essential for good performance for deep methods like [scVI](https://www.nature.com/articles/s41592-018-0229-2). Furthermore, as pointed out by [Hu and Greene (2019)](https://www.worldscientific.com/doi/pdf/10.1142/9789813279827_0033?download=true&) selecting hyperparameters is nessary in order to compare different machine learning models, especially if those are substantially sensitive to hyperparameter variations. 
 
-# Theory : Bayesian Optimization and Hyperopt
+Generally, hyperparameter search is known to be challenging for the end-user and time-consuming. Therefore, we added in [`scVI`](https://github.com/YosefLab/scVI) a module based on the Bayesian optimization framework [`hyperopt`](https://github.com/hyperopt/hyperopt). This new feature makes effective use of multiple GPUs and is a ready-to-use solution for tuning hyperparameters in scVI. This blog post presents this feature and investigates how end-users will benefit from it.
+
+# Theory : Bayesian Optimization and `Hyperopt`
 
 First and foremost, one needs to carefully select a metric for which to search for optimal hyperparameters, keeping in mind that this one might depend on the downstream task, as explained in [Theis et al. (2016)](https://arxiv.org/abs/1511.01844). Since we train a generative model, the held-out negative log-likelihood is a natural criterion for model selection. We therefore rely on it for hyperparameters tuning. 
 
@@ -31,7 +33,7 @@ import logging
 logger = logging.getLogger("scvi.inference.autotune")
 logger.setLevel(logging.DEBUG)
 
-if __name__ == "__main__"
+if __name__ == "__main__":
 	best_trainer, trials = auto_tune_scvi_model(
 	    gene_dataset=dataset,
 	    parallel=True,
@@ -70,9 +72,9 @@ We report the runtime metadata of our experiments in Table 1. This should give t
       <th>Dataset Name</th>
       <th>Nb cells</th>
       <th>Nb genes</th>
-      <th>Total wall time</th>
-      <th>Avg epochs per training</th>
-      <th>Number of GPUs</th>
+      <th>Wall time</th>
+      <th>Avg epochs</th>
+      <th>N° of GPUs</th>
       <th>Max epoch</th>
     </tr>
   </thead>
@@ -108,7 +110,7 @@ We report the runtime metadata of our experiments in Table 1. This should give t
 </table>
 </center>
 
-Table 1: Runtime Table for 100 trainings
+Table 1: Runtime Table for 100 trainings. Wall time is the total time the experiment took. Avg epoch is the average number of epochs per training.
 
 #### Hyperparameter sensitivity 
 
@@ -1001,19 +1003,19 @@ Our next concern was to investigate the kind of performance uplift we could yiel
 
 <center>
 <table style="width:70%; font-size:80%" align="center">
-  <summary> Results Table </summary>
   <thead>
     <tr>
-      <th colspan="2" rowspan=2 ></th>
+      <th rowspan="2">Dataset</th>
+      <th rowspan="2">Run</th>
       <th colspan="3" halign="left">Likelihood</th>
       <th colspan="2" halign="left">Imputation score</th>
     </tr>
     <tr>
-      <th>Held-out marginal ll</th>
+      <th>Marginal ll</th>
       <th>ELBO train</th>
       <th>ELBO test</th>
-      <th>median</th>
-      <th>mean</th>
+      <th>Median</th>
+      <th>Mean</th>
     </tr>
   </thead>
   <tbody>
@@ -1073,7 +1075,7 @@ Our next concern was to investigate the kind of performance uplift we could yiel
 </center>
 
 
-Table 5: Comparison between the best and default runs of scVI on the Cortex, Pbmc and Brain Large datasets. Likelihood and imputation benchmarks are reported.
+Table 5: Comparison between the best and default runs of scVI on the Cortex, Pbmc and Brain Large datasets. **Held-out** marginal log-likelihood and imputation benchmarks are reported.
 
 Note that the median (resp. mean) imputation score is the median (resp. mean) of the median absolute error per cell. Also, the held-out marginal negative log-likelihood is an importance sampling estimate of the negative marginal log-likelihood $-\log p(x)$ computed on a 25% test set and is the metric we optimize for. 
 
