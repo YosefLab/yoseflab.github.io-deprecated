@@ -36,6 +36,7 @@ $medalist: #C4820E !default;
 $foundersrock: #3B7EA1 !default;
 $berkeleyblue: #003262 !default;
 $calgold: #FDB515 !default;
+$lawrence: #00B0DA !default;
 $blue: #0076df !default;
 $red: #f95020 !default;
 $green: #00cf26 !default;
@@ -57,8 +58,8 @@ $darken-3: rgba(#000,.25) !default;
 $darken-4: rgba(#000,.5) !default;
 
 // Links
-$link-color: $calgold;
-$link-hover-color: darken($blue, 40%);
+$link-color: $medalist;
+$link-hover-color: darken($medalist, 40%);
 
 // Breakpoints
 $breakpoint-md: '(min-width: 52em)';
